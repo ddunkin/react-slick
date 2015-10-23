@@ -3,16 +3,14 @@ Carousel component built with React. It is a react port of [slick carousel](http
 
 And a fork of the awesome [react-slick](https://github.com/akiran/react-slick)
 
-# Checkout react-slick@0.9.0-rc1 for react 0.14 support
-
 # Road to 1.0
-react-slick is under active development now.
+react-slicker is under active development now.
 Soon this project will have all the features of slick carousel.
 We encourage your feedback and support.
 
 ### Installation
 ```bash
-  npm install react-slick
+  npm install react-slicker
 ```
 Also install slick-carousel for css and font
 ```bash
@@ -24,11 +22,6 @@ or add cdn link in your html
 ```
 
 ### [Demos](http://webrafter.com/opensource/react-slick)
-
-
-### Starter Kit
-Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly
-get started with react-slick.
 
 ### Example
 ```js
