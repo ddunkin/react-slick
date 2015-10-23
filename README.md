@@ -1,5 +1,7 @@
-# react-slick
+# react-slicker
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
+
+And a fork of the awesome [react-slick](https://github.com/akiran/react-slick)
 
 # Checkout react-slick@0.9.0-rc1 for react 0.14 support
 
@@ -80,7 +82,7 @@ var SimpleSlider = React.createClass({
 | rtl            | bool | Reverses the slide order | Yes |
 | slide         | string |||
 | slidesToShow | int | Number of slides to be visible at a time | Yes |
-| slidesToScroll | int | Number of slides to scroll for each navigation item
+| slidesToScroll | int | Number of slides to scroll for each navigation item |
 | speed | int |||
 | swipe | bool |||
 | swipeToSlide | bool |||
