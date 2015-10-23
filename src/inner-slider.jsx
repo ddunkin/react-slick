@@ -65,6 +65,36 @@ export var InnerSlider = React.createClass({
   onWindowResized: function () {
     this.update(this.props);
   },
+  prevArrowClick(options) {
+    const {onArrowsClick} = this.props;
+
+    if (typeof onArrowsClick === 'function') {
+      const {currentSlide, slideCount} = this.state;
+
+      return onArrowsClick(
+          'prev',
+          currentSlide,
+          currentSlide === 0 ? slideCount - 1 : currentSlide - 1
+      );
+    }
+
+    this.changeSlide(options);
+  },
+  nextArrowClick(options) {
+    const {onArrowsClick} = this.props;
+
+    if (typeof onArrowsClick === 'function') {
+      const {currentSlide, slideCount} = this.state;
+
+      return onArrowsClick(
+          'next',
+          currentSlide,
+          currentSlide === (slideCount - 1) ? 0 : currentSlide + 1
+      );
+    }
+
+    this.changeSlide(options);
+  },
   render: function () {
     var className = classnames('slick-initialized', 'slick-slider', this.props.className);
 
@@ -109,13 +139,12 @@ export var InnerSlider = React.createClass({
       slideCount: this.state.slideCount,
       slidesToShow: this.props.slidesToShow,
       prevArrow: this.props.prevArrow,
-      nextArrow: this.props.nextArrow,
-      clickHandler: this.changeSlide
+      nextArrow: this.props.nextArrow
     };
 
     if (this.props.arrows) {
-      prevArrow = (<PrevArrow {...arrowProps} />);
-      nextArrow = (<NextArrow {...arrowProps} />);
+      prevArrow = (<PrevArrow {...arrowProps} clickHandler={this.prevArrowClick} />);
+      nextArrow = (<NextArrow {...arrowProps} clickHandler={this.nextArrowClick} />);
     }
 
     return (

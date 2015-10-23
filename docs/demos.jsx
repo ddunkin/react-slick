@@ -360,7 +360,7 @@ var SetCurrentSlide = React.createClass({
   getInitialState: function () {
     return {currentSlide: 0};
   },
-  onButtonClick(to, e) {
+  onButtonClick(to) {
     this.setState({currentSlide: to});
   },
   render: function () {
@@ -400,6 +400,38 @@ var SetCurrentSlide = React.createClass({
   }
 });
 
+var NextPrevHandlers = React.createClass({
+  getInitialState: function () {
+    return {currentSlide: 0};
+  },
+  onButtonClick(direction, from, to) {
+    console.log(direction, from, to);
+
+    this.setState({currentSlide: to});
+  },
+  render: function () {
+    var settings = {
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      currentSlide: this.state.currentSlide,
+      onArrowsClick: this.onButtonClick
+    };
+    return (
+        <div>
+          <h2>Next and prev arrows handlers</h2>
+          <Slider {...settings}>
+            <div><img src={baseUrl + '/img/abstract01.jpg'} /></div>
+            <div><img src={baseUrl + '/img/abstract02.jpg'} /></div>
+            <div><img src={baseUrl + '/img/abstract03.jpg'} /></div>
+            <div><img src={baseUrl + '/img/abstract04.jpg'} /></div>
+          </Slider>
+        </div>
+    );
+  }
+});
+
 var App = React.createClass({
   render: function () {
     //need to add variable width and center mode demo
@@ -417,6 +449,7 @@ var App = React.createClass({
         <LazyLoad />
         <Fade />
         <SetCurrentSlide />
+        <NextPrevHandlers />
       </div>
     );
   }

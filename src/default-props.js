@@ -8,6 +8,7 @@ var defaultProps = {
     centerMode: false,
     centerPadding: '50px',
     cssEase: 'ease',
+    currentSlide: null,
     dots: false,
     dotsClass: 'slick-dots',
     draggable: true,
@@ -39,7 +40,9 @@ var defaultProps = {
     swipeEvent: null,
     // nextArrow, prevArrow are react componets
     nextArrow: null,
-    prevArrow: null
+    nextArrowClick: null,
+    prevArrow: null,
+    onArrowsClick: null
 };
 
 module.exports = defaultProps;
