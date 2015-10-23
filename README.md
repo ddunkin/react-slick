@@ -3,6 +3,9 @@ Carousel component built with React. It is a react port of [slick carousel](http
 
 And a fork of the awesome [react-slick](https://github.com/akiran/react-slick)
 
+which extends the slick props to support setting the current slide and handle clicks on the
+carousel arrows.
+
 # Road to 1.0
 react-slicker is under active development now.
 Soon this project will have all the features of slick carousel.
@@ -71,6 +74,7 @@ var SimpleSlider = React.createClass({
 | infinite       | should the gallery wrap around it's contents | Yes |
 | initialSlide   | int | which item should be the first to be displayed | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |
+| onArrowsClick  | function | Handler for a click on the arrows | Yes |
 | responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
 | rtl            | bool | Reverses the slide order | Yes |
 | slide         | string |||
