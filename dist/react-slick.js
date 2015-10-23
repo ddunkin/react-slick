@@ -76,15 +76,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _json2mq = __webpack_require__(160);
+	var _json2mq = __webpack_require__(159);
 
 	var _json2mq2 = _interopRequireDefault(_json2mq);
 
-	var _reactResponsiveMixin = __webpack_require__(162);
+	var _reactResponsiveMixin = __webpack_require__(161);
 
 	var _reactResponsiveMixin2 = _interopRequireDefault(_reactResponsiveMixin);
 
-	var _defaultProps = __webpack_require__(155);
+	var _defaultProps = __webpack_require__(154);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
@@ -192,23 +192,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _mixinsHelpers2 = _interopRequireDefault(_mixinsHelpers);
 
-	var _initialState = __webpack_require__(154);
+	var _initialState = __webpack_require__(153);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
-	var _defaultProps = __webpack_require__(155);
+	var _defaultProps = __webpack_require__(154);
 
 	var _defaultProps2 = _interopRequireDefault(_defaultProps);
 
-	var _classnames = __webpack_require__(156);
+	var _classnames = __webpack_require__(155);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
-	var _track = __webpack_require__(157);
+	var _track = __webpack_require__(156);
 
-	var _dots = __webpack_require__(158);
+	var _dots = __webpack_require__(157);
 
-	var _arrows = __webpack_require__(159);
+	var _arrows = __webpack_require__(158);
 
 	var InnerSlider = _react2['default'].createClass({
 	  displayName: 'InnerSlider',
@@ -270,6 +270,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onWindowResized: function onWindowResized() {
 	    this.update(this.props);
 	  },
+	  prevArrowClick: function prevArrowClick(options) {
+	    var onArrowsClick = this.props.onArrowsClick;
+
+	    if (typeof onArrowsClick === 'function') {
+	      var _state = this.state;
+	      var currentSlide = _state.currentSlide;
+	      var slideCount = _state.slideCount;
+
+	      return onArrowsClick('prev', currentSlide, currentSlide === 0 ? slideCount - 1 : currentSlide - 1);
+	    }
+
+	    this.changeSlide(options);
+	  },
+	  nextArrowClick: function nextArrowClick(options) {
+	    var onArrowsClick = this.props.onArrowsClick;
+
+	    if (typeof onArrowsClick === 'function') {
+	      var _state2 = this.state;
+	      var currentSlide = _state2.currentSlide;
+	      var slideCount = _state2.slideCount;
+
+	      return onArrowsClick('next', currentSlide, currentSlide === slideCount - 1 ? 0 : currentSlide + 1);
+	    }
+
+	    this.changeSlide(options);
+	  },
 	  render: function render() {
 	    var className = (0, _classnames2['default'])('slick-initialized', 'slick-slider', this.props.className);
 
@@ -314,13 +340,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideCount: this.state.slideCount,
 	      slidesToShow: this.props.slidesToShow,
 	      prevArrow: this.props.prevArrow,
-	      nextArrow: this.props.nextArrow,
-	      clickHandler: this.changeSlide
+	      nextArrow: this.props.nextArrow
 	    };
 
 	    if (this.props.arrows) {
-	      prevArrow = _react2['default'].createElement(_arrows.PrevArrow, arrowProps);
-	      nextArrow = _react2['default'].createElement(_arrows.NextArrow, arrowProps);
+	      prevArrow = _react2['default'].createElement(_arrows.PrevArrow, _extends({}, arrowProps, { clickHandler: this.prevArrowClick }));
+	      nextArrow = _react2['default'].createElement(_arrows.NextArrow, _extends({}, arrowProps, { clickHandler: this.nextArrowClick }));
 	    }
 
 	    return _react2['default'].createElement(
@@ -19401,7 +19426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var ExecutionEnvironment = __webpack_require__(153);
+	var ExecutionEnvironment = __webpack_require__(12);
 
 	/**
 	 * EVENT_NAME_MAP is used to determine which event fired when a
@@ -19502,47 +19527,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 153 */
 /***/ function(module, exports) {
 
-	/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ExecutionEnvironment
-	 */
-
-	'use strict';
-
-	var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-	/**
-	 * Simple, lightweight module assisting with the detection and context of
-	 * Worker. Helps avoid circular dependencies and allows code to reason about
-	 * whether or not they are in a Worker, even if they never include the main
-	 * `ReactWorker` dependency.
-	 */
-	var ExecutionEnvironment = {
-
-	  canUseDOM: canUseDOM,
-
-	  canUseWorkers: typeof Worker !== 'undefined',
-
-	  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
-
-	  canUseViewport: canUseDOM && !!window.screen,
-
-	  isInWorker: !canUseDOM // For now, this is true - might change in the future.
-
-	};
-
-	module.exports = ExecutionEnvironment;
-
-/***/ },
-/* 154 */
-/***/ function(module, exports) {
-
 	"use strict";
 
 	var initialState = {
@@ -19590,7 +19574,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = initialState;
 
 /***/ },
-/* 155 */
+/* 154 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19605,6 +19589,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    centerMode: false,
 	    centerPadding: '50px',
 	    cssEase: 'ease',
+	    currentSlide: null,
 	    dots: false,
 	    dotsClass: 'slick-dots',
 	    draggable: true,
@@ -19636,13 +19621,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    swipeEvent: null,
 	    // nextArrow, prevArrow are react componets
 	    nextArrow: null,
-	    prevArrow: null
+	    nextArrowClick: null,
+	    prevArrow: null,
+	    onArrowsClick: null
 	};
 
 	module.exports = defaultProps;
 
 /***/ },
-/* 156 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -19696,7 +19683,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 157 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19715,7 +19702,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _classnames = __webpack_require__(156);
+	var _classnames = __webpack_require__(155);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -19837,7 +19824,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Track = Track;
 
 /***/ },
-/* 158 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19852,7 +19839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(156);
+	var _classnames = __webpack_require__(155);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -19916,7 +19903,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.Dots = Dots;
 
 /***/ },
-/* 159 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19933,7 +19920,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _classnames = __webpack_require__(156);
+	var _classnames = __webpack_require__(155);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -20033,10 +20020,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.NextArrow = NextArrow;
 
 /***/ },
-/* 160 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var camel2hyphen = __webpack_require__(161);
+	var camel2hyphen = __webpack_require__(160);
 
 	var isDimension = function (feature) {
 	  var re = /[height|width]$/;
@@ -20089,7 +20076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = json2mq;
 
 /***/ },
-/* 161 */
+/* 160 */
 /***/ function(module, exports) {
 
 	var camel2hyphen = function (str) {
@@ -20103,12 +20090,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = camel2hyphen;
 
 /***/ },
-/* 162 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var canUseDOM = __webpack_require__(163);
-	var enquire = canUseDOM && __webpack_require__(164);
-	var json2mq = __webpack_require__(160);
+	var canUseDOM = __webpack_require__(162);
+	var enquire = canUseDOM && __webpack_require__(163);
+	var json2mq = __webpack_require__(159);
 
 	var ResponsiveMixin = {
 	  media: function (query, handler) {
@@ -20138,7 +20125,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ResponsiveMixin;
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports) {
 
 	var canUseDOM = !!(
@@ -20150,7 +20137,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = canUseDOM;
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
