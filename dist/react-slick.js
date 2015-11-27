@@ -64,6 +64,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 	var _react = __webpack_require__(2);
@@ -158,7 +162,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	});
 
-	module.exports = Slider;
+	exports['default'] = Slider;
+	module.exports = exports['default'];
 
 /***/ },
 /* 2 */
@@ -246,8 +251,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.adaptHeight();
 	    if (window.addEventListener) {
 	      window.addEventListener('resize', this.onWindowResized);
+	      window.addEventListener('blur', this.onWindowInactive);
+	      window.addEventListener('focus', this.onWindowActive);
 	    } else {
 	      window.attachEvent('onresize', this.onWindowResized);
+	      window.attachEvent('blur', this.onWindowInactive);
+	      window.attachEvent('focus', this.onWindowActive);
 	    }
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
@@ -261,8 +270,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (this.props.slickGoTo != nextProps.slickGoTo) {
-	      this.setState({ currentSlide: nextProps.slickGoTo });
+	    var _this = this;
+
+	    // Only do this if prop is properly set, otherwise keep things normal
+	    if (Number.isInteger(nextProps.slickGoTo)) {
+	      setTimeout(function () {
+	        return _this.changeSlide({ index: nextProps.slickGoTo });
+	      });
 	    }
 
 	    this.update(nextProps);
@@ -272,6 +286,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  onWindowResized: function onWindowResized() {
 	    this.update(this.props);
+	  },
+	  onWindowInactive: function onWindowInactive() {
+	    if (this.state.autoPlayTimer) {
+	      window.clearTimeout(this.state.autoPlayTimer);
+	    }
+	  },
+	  onWindowActive: function onWindowActive() {
+	    this.autoPlay();
 	  },
 	  prevArrowClick: function prevArrowClick(options) {
 	    var onArrowsClick = this.props.onArrowsClick;
@@ -899,8 +921,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.props.beforeChange(this.state.currentSlide, currentSlide);
 	      }
 
-	      this.autoPlay();
-	      return;
+	      return this.autoPlay();
 	    }
 
 	    targetSlide = index;
