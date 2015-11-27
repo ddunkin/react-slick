@@ -370,7 +370,7 @@ var SetCurrentSlide = React.createClass({
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
-      currentSlide: this.state.currentSlide
+      slickGoTo: this.state.currentSlide
     };
     return (
         <div className="set-current-slide">
@@ -415,7 +415,7 @@ var NextPrevHandlers = React.createClass({
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-      currentSlide: this.state.currentSlide,
+      slickGoTo: this.state.currentSlide,
       onArrowsClick: this.onButtonClick
     };
     return (

@@ -63,4 +63,4 @@ var Slider = React.createClass({
   }
 });
 
-module.exports = Slider;
+export default Slider;

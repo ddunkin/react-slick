@@ -6,6 +6,8 @@ And a fork of the awesome [react-slick](https://github.com/akiran/react-slick)
 which extends the slick props to support setting the current slide and handle clicks on the
 carousel arrows.
 
+For React 0.12 or below version support, please stick with react-slick@0.7.2
+
 # Road to 1.0
 react-slicker is under active development now.
 Soon this project will have all the features of slick carousel.
@@ -64,7 +66,6 @@ var SimpleSlider = React.createClass({
 | centerMode     | bool | Should we centre to a single item? | Yes |
 | centerPadding  | | | |
 | cssEase        | | | |
-| currentSlide   | int | Sets the current slide | Yes |
 | dots           |bool | Should we show the dots at the bottom of the gallery | Yes |
 | dotsClass      | string | Class applied to the dots if they are enabled | Yes |
 | draggable      | bool | Is the gallery scrollable via dragging on desktop? | Yes |
@@ -90,6 +91,7 @@ var SimpleSlider = React.createClass({
 | vertical | bool |||
 | afterChange | function | callback function called after the current index changes | Yes |
 | beforeChange | function | callback function called before the current index changes | Yes |
+| slickGoTo | int | go to the specified slide number
 
 ### Development
 Want to run demos locally

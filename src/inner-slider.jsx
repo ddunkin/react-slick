@@ -39,22 +39,34 @@ export var InnerSlider = React.createClass({
       });
     }
   },
-  componentDidMount: function () {
+  componentDidMount: function componentDidMount() {
     // Hack for autoplay -- Inspect Later
     this.initialize(this.props);
     this.adaptHeight();
-    window.addEventListener('resize', this.onWindowResized);
+    if (window.addEventListener) {
+      window.addEventListener('resize', this.onWindowResized);
+      window.addEventListener('blur', this.onWindowInactive);
+      window.addEventListener('focus', this.onWindowActive);
+    } else {
+      window.attachEvent('onresize', this.onWindowResized);
+      window.attachEvent('blur', this.onWindowInactive);
+      window.attachEvent('focus', this.onWindowActive);
+    }
   },
-  componentWillUnmount: function () {
-    window.removeEventListener('resize', this.onWindowResized);
+  componentWillUnmount: function componentWillUnmount() {
+    if (window.addEventListener) {
+      window.removeEventListener('resize', this.onWindowResized);
+    } else {
+      window.detachEvent('onresize', this.onWindowResized);
+    }
     if (this.state.autoPlayTimer) {
       window.clearTimeout(this.state.autoPlayTimer);
     }
   },
   componentWillReceiveProps: function(nextProps) {
     // Only do this if prop is properly set, otherwise keep things normal
-    if (Number.isInteger(nextProps.currentSlide)) {
-      setTimeout(() => this.changeSlide({index: nextProps.currentSlide}));
+    if (Number.isInteger(nextProps.slickGoTo)) {
+      setTimeout(() => this.changeSlide({index: nextProps.slickGoTo}));
     }
 
     this.update(nextProps);
@@ -64,6 +76,14 @@ export var InnerSlider = React.createClass({
   },
   onWindowResized: function () {
     this.update(this.props);
+  },
+  onWindowInactive: function () {
+    if (this.state.autoPlayTimer) {
+      window.clearTimeout(this.state.autoPlayTimer);
+    }
+  },
+  onWindowActive: function () {
+    this.autoPlay();
   },
   prevArrowClick(options) {
     const {onArrowsClick} = this.props;
