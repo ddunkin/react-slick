@@ -249,6 +249,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Hack for autoplay -- Inspect Later
 	    this.initialize(this.props);
 	    this.adaptHeight();
+
 	    if (window.addEventListener) {
 	      window.addEventListener('resize', this.onWindowResized);
 	      window.addEventListener('blur', this.onWindowInactive);
@@ -262,9 +263,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  componentWillUnmount: function componentWillUnmount() {
 	    if (window.addEventListener) {
 	      window.removeEventListener('resize', this.onWindowResized);
+	      window.removeEventListener('blur', this.onWindowInactive);
+	      window.removeEventListener('focus', this.onWindowActive);
 	    } else {
 	      window.detachEvent('onresize', this.onWindowResized);
+	      window.detachEvent('blur', this.onWindowInactive);
+	      window.detachEvent('focus', this.onWindowActive);
 	    }
+
 	    if (this.state.autoPlayTimer) {
 	      window.clearTimeout(this.state.autoPlayTimer);
 	    }
@@ -1325,7 +1331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	  Copyright (c) 2015 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
@@ -1366,9 +1372,9 @@ return /******/ (function(modules) { // webpackBootstrap
 			module.exports = classNames;
 		} else if (true) {
 			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else {
 			window.classNames = classNames;
 		}
