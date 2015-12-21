@@ -1648,7 +1648,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ref: 'previous',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(prevClasses),
-	      style: { display: 'block' },
 	      onClick: prevHandler
 	    };
 	    var prevArrow;
@@ -1706,7 +1705,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      ref: 'next',
 	      'data-role': 'none',
 	      className: (0, _classnames2['default'])(nextClasses),
-	      style: { display: 'block' },
 	      onClick: nextHandler
 	    };
 

@@ -23,7 +23,6 @@ export var PrevArrow = React.createClass({
       ref: 'previous',
       'data-role': 'none',
       className: classnames(prevClasses),
-      style: {display: 'block'},
       onClick: prevHandler
     };
     var prevArrow;
@@ -75,7 +74,6 @@ export var NextArrow = React.createClass({
       ref: 'next',
       'data-role': 'none',
       className: classnames(nextClasses),
-      style: {display: 'block'},
       onClick: nextHandler
     };
 
